@@ -73,9 +73,6 @@ To showcase your documentation publicly:
 - The ReqRes API is provided by [reqres.in](https://reqres.in/) for demo and testing purposes.
 - This repo is for educational and portfolio use only.
 
-```
-Let me know if you'd also like a version of `index.html` that redirects to `redoc-static.html` automatically (for a smoother GitHub Pages portfolio setup).
-```
 
 
 
