@@ -1,0 +1,130 @@
+openapi: 3.0.3
+info:
+  title: API documentation for ReqRes API
+  version: 1.0.0
+  description: |
+    This is a sample API documentation for [ReqRes](https://reqres.in) — a fake REST API for testing and prototyping.
+    It includes endpoints for user data, registration, and login.
+
+servers:
+  - url: https://reqres.in/api
+
+paths:
+  /users:
+    get:
+      summary: Use this to list all the users
+      description: You can call this endpoint to get a paginated list of users.
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: Page number to fetch
+      responses:
+        '200':
+          description: A list of users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserList'
+  
+    post:
+      summary: Use this to create a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewUser'
+      responses:
+        '201':
+          description: The user created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedUser'
+
+  /login:
+    post:
+      summary: Use this to login a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginUser'
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        '400':
+          description: Missing email or password
+
+components:
+  schemas:
+    UserList:
+      type: object
+      properties:
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total:
+          type: integer
+        total_pages:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        avatar:
+          type: string
+
+    NewUser:
+      type: object
+      required: [name, job]
+      properties:
+        name:
+          type: string
+        job:
+          type: string
+
+    CreatedUser:
+      type: object
+      properties:
+        name:
+          type: string
+        job:
+          type: string
+        id:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    LoginUser:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+        password:
+          type: string
