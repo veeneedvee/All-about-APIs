@@ -19,7 +19,7 @@ jobs:
       - name: Generate static HTML from OpenAPI
         run: |
           mkdir -p site
-          npx @redocly/cli build-docs API-Docs/redoc-docs/openapi.yaml -o site/index.html
+          npx @redocly/cli build-docs API-Docs/redoc-docs/OpenAPI3.0ReqRes.yaml -o site/index.html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
