@@ -2,7 +2,7 @@ name: Deploy ReDoc Docs to GitHub Pages
 
 on:
   push:
-    branches: [main] # or 'master' if that's your default
+    branches: [main] # or `master` if that's your default
 
 jobs:
   deploy:
