@@ -4,6 +4,9 @@ on:
   push:
     branches: [main] # or `master` if that's your default
 
+permissions:
+  contents: write  # 🔥 This is required to push to gh-pages
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
