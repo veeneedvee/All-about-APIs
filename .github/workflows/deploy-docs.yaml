@@ -1,20 +1,28 @@
-name: Deploy ReDoc Docs to GitHub Pages
+# .github/workflows/deploy.yml
+name: Deploy ReDoc to GitHub Pages
 
 on:
   push:
-    branches: [main] # or `master` if that's your default
+    branches: [main]  # or your default branch
 
 permissions:
-  contents: write  # 🔥 This is required to push to gh-pages
+  contents: write  # 💡 Required for pushing to gh-pages
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: 📥 Checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: 📦 Deploy redoc-docs to GitHub Pages
+      - name: Install ReDoc CLI
+        run: npm install -g redoc-cli
+
+      - name: Generate static HTML with ReDoc
+        run: redoc-cli bundle redoc-docs/openapi.yaml -o redoc-docs/redoc-static.html
+
+      - name: Deploy to GitHub Pages 🚀
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
